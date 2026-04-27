@@ -36,12 +36,17 @@ jobs:
         run: |
           set -euo pipefail
 
+          SERVER_HOST="${SERVER_HOST:-130.162.34.199}"
           SERVER_USER="${SERVER_USER:-ubuntu}"
           SERVER_PORT="${SERVER_PORT:-22}"
           SERVER_APP_DIR="${SERVER_APP_DIR:-/home/ubuntu/stranky}"
 
-          : "${SERVER_HOST:?Missing GitHub secret SERVER_HOST}"
-          : "${SERVER_SSH_KEY:?Missing GitHub secret SERVER_SSH_KEY}"
+          if [ -z "${SERVER_SSH_KEY:-}" ]; then
+            echo "::error::Missing GitHub secret SERVER_SSH_KEY"
+            exit 1
+          fi
+
+          echo "Deploy target: ${SERVER_USER}@${SERVER_HOST}:${SERVER_PORT}"
 
           mkdir -p ~/.ssh
           printf '%s\n' "${SERVER_SSH_KEY}" > ~/.ssh/deploy_key
