@@ -10,7 +10,7 @@
 
 
 # Portfolio - kubojancik.site
-kubojancik.site {
+kubojancik.site, www.kubojancik.site {
     reverse_proxy portfolio-app:80
 
     # Security headers
@@ -33,7 +33,7 @@ kubojancik.site {
 }
 
 # Útulňa Kráľová Studňa - utulna-kralova-studna.online
-utulna-kralova-studna.online {
+utulna-kralova-studna.online, www.utulna-kralova-studna.online {
     reverse_proxy frontend:80
 
     # Security headers
