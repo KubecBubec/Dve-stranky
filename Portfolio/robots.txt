@@ -1,0 +1,17 @@
+# robots.txt pre Portfolio stránku
+
+# Povoliť všetkým vyhľadávacím robotom prístup
+User-agent: *
+Allow: /
+
+# Zakázať prístup k systémovým súborom a priečinkom
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+
+# Sitemap umiestnenie
+Sitemap: https://kubojancik.site/sitemap.xml
+
+# Crawl delay (voliteľné - odporúčané pre malé stránky)
+Crawl-delay: 1
+

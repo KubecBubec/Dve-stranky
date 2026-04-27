@@ -1,0 +1,31 @@
+# Caddyfile pre portfólio web
+
+
+# Produkčná doména - nahraď tvojadomena.com svojou doménou
+# Odkomentuj tento blok pri nasadení na server s reálnou doménou
+kubojancik.site {
+    reverse_proxy portfolio-app:80
+
+     # Security headers
+     header {
+         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+         X-XSS-Protection "1; mode=block"
+         X-Content-Type-Options "nosniff"
+         Referrer-Policy "strict-origin-when-cross-origin"
+         -Server
+     }
+
+     # Compression
+     encode gzip zstd
+
+     # Logging
+     log {
+         output stdout
+         format console
+     }
+ }
+
+# HTTP to HTTPS redirect (voliteľné - Caddy to robí automaticky)
+ :80 {
+     redir https://{host}{uri} permanent
+ }

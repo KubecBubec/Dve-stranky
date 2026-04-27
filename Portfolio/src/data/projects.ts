@@ -1,0 +1,183 @@
+import type { Project } from '../types'
+
+export const projects: Project[] = [
+  {
+    id: 1,
+    title: 'Waze Notifier Pro',
+    description:
+      'Systém na monitorovanie dopravných udalostí z mapy Waze v reálnom čase pre asistenčné služby na Slovensku. Poskytuje okamžité notifikácie cez Telegram, nastavenie geozón a históriu dopravných udalostí.',
+    longDescription:
+      'Waze Notifier Pro monitoruje dopravné udalosti z Waze API (nehody, prekážky, policajné hliadky, kolóny, uzávierky) a posiela okamžité notifikácie cez Telegram. Umožňuje nastavenie geozón a filtrov podľa typu udalostí, poskytuje históriu a štatistiky. Podporuje tímovú prácu a správu členov. Rieši problém pomalých reakcií asistenčných služieb automatizáciou monitorovania 24/7.',
+    image: '/images/projects/waze-notifier-pro.png',
+    technologies: [
+      'Next.js 15',
+      'TypeScript',
+      'React 19',
+      'Tailwind CSS',
+      'Node.js',
+      'Prisma ORM',
+      'PostgreSQL',
+      'NextAuth v5',
+      'Telegram Bot API',
+      'Firebase',
+      'Docker',
+      'Caddy',  
+    ],
+    githubUrl: '',
+    liveUrl: 'https://waze-assistance.site',
+    category: 'fullstack',
+  },
+  {
+    id: 2,
+    title: 'XChangeSniper',
+    description:
+      'Automatizovaný nástroj na monitorovanie zmien Twitter/X profilov (meno, bio, avatar, banner) s okamžitými notifikáciami cez Telegram. Umožňuje sledovanie vybraných profilov 24/7 a poskytuje web dashboard pre správu.',
+    longDescription:
+      'XChangeSniper (Twitter Profile Sniper Bot) monitoruje vybrané Twitter/X profily 24/7 a deteguje zmeny na profiloch. Posiela okamžité notifikácie cez Telegram pri zmenách, ukladá históriu zmien do JSON súborov a poskytuje web dashboard pre správu a monitoring. Aplikácia je zameraná na crypto traderov a "alpha hunters", ktorí chcú zachytiť signály od influencerov skôr, ako sa rozšíria.',
+    image: '/images/projects/xchangesniper.jpg',
+    technologies: [
+      'Python 3.12',
+      'Playwright',
+      'Flask',
+      'Twitter API v2',
+      'Telegram Bot API',
+      'Docker',
+      'Chart.js',
+    ],
+    githubUrl: '',
+    liveUrl: 'https://kubo-s5adghwo.scoreapp.com/p/main-landing-page',
+    telegramUrl: 'https://t.me/XChangeSniperBot',
+    category: 'fullstack',
+  },
+  {
+    id: 3,
+    title: 'PumpFun Token Explorer',
+    description:
+      'Webová aplikácia na prehliadanie a vyhľadávanie tokenov z Pump.fun (token launchpad na Solane). Poskytuje pokročilé filtrovanie podľa market cap, dátumu vytvorenia a názvu tokenu.',
+    longDescription:
+      'PumpFun Token Explorer zobrazuje tokeny z Pump.fun v prehľadnom rozhraní. Umožňuje filtrovanie podľa market cap (rozsah), dátumu vytvorenia (od–do) a názvu tokenu (vyhľadávanie). Podporuje stránkovanie a načítavanie ďalších tokenov. Zobrazuje pre každý token názov, symbol, popis, obrázok, market cap a dátum vytvorenia. Umožňuje otvorenie tokenu na Pump.fun kliknutím na kartu.',
+    image: '/images/projects/pumpfun-token-explorer.png',
+    technologies: [
+      'Node.js',
+      'Express.js',
+      'Solana Web3.js',
+      'Pump.fun API',
+      'HTML5',
+      'JavaScript',
+      'Tailwind CSS',
+    ],
+    githubUrl: '',
+    liveUrl: '',
+    category: 'web',
+  },
+  {
+    id: 4,
+    title: 'Stránka PROXI Restaurant & Bar',
+    description:
+      'Webová stránka pre PROXI Restaurant & Bar s prezentáciou reštaurácie, menu, galériou fotografií, rezervačným systémom, kontaktným formulárom a admin panelom na správu týždenného menu.',
+    longDescription:
+      'Komplexná webová stránka pre reštauráciu obsahujúca hlavnú stránku s prezentáciou, menu (jedlá, nápoje, dezerty), galériu fotografií, rezervačný systém, kontaktný formulár a admin panel na správu týždenného menu s možnosťou uploadu obrázkov.',
+    image: '/images/projects/proxi-restaurant.png',
+    technologies: [
+      'HTML5',
+      'CSS3',
+      'JavaScript',
+      'jQuery',
+      'Bootstrap',
+      'PHP',
+      'JSON',
+    ],
+    githubUrl: '',
+    liveUrl: 'https://test.proxirestaurant.sk',
+    category: 'web',
+  },
+  {
+    id: 5,
+    title: 'Webová stránka (aa24.sk) + Systém generovania zmlúv',
+    description:
+      'Webová prezentácia pre 24/7 asistenčnú službu pri autonehodách v Košiciach a okolí s admin panelom a systémom generovania zmlúv o poskytnutí náhradného vozidla s exportom do PDF a odosielaním emailov.',
+    longDescription:
+      'Aplikácia pozostáva z dvoch hlavných častí: 1) Hlavná webová stránka (aa24.sk) - webová prezentácia pre 24/7 asistenčnú službu pri autonehodách s informáciami o službách, kontaktným formulárom a admin panelom s autentifikáciou cez Google OAuth. 2) Systém generovania zmlúv (ZMLUVY) - aplikácia na generovanie zmlúv o poskytnutí náhradného vozidla s možnosťou exportu do PDF, odosielania emailov cez Mailgun, editácie šablón dokumentov a podpisu zákazníka (canvas).',
+    image: '/images/projects/aa24.png',
+    technologies: [
+      'HTML5',
+      'CSS3',
+      'JavaScript',
+      'jQuery',
+      'Bootstrap',
+      'PHP 8.3',
+      'Google OAuth 2.0',
+      'Mailgun API',
+      'jsPDF',
+      'html2canvas',
+    ],
+    githubUrl: '',
+    liveUrl: 'https://aa24.sk/',
+    category: 'fullstack',
+  },
+  {
+    id: 6,
+    title: 'Útulňa Kráľová Studňa',
+    description:
+      'Webová aplikácia pre turistickú útulňu v pohorí Čierna hora (okolo 450 m od červenej turistickej magistrály), v oblasti Sokoľ, Košice-okolie. Informačná stránka, kalendár návštev a fórum.',
+    longDescription:
+      'Útulňa Kráľová Studňa je webová aplikácia pre turistickú útulňu v pohorí Čierna hora (okolo 450 m od červenej turistickej magistrály), v oblasti Sokoľ, Košice-okolie. Účel: Informačná stránka – popis útulne, kapacita 6–8 osôb, vybavenie (piecka, suchá toaleta, prameň Kráľová studňa), poloha, trasy, fotky. Kalendár návštev – zobrazenie plánovaných návštev a možnosť ich pridávať (po prihlásení). Fórum – diskusia (príspevky a odpovede) s uložením v databáze. Právne stránky – Ochrana osobných údajov (GDPR), Podmienky používania. SEO a zdieľanie – meta tagy, Open Graph, Twitter karty, JSON-LD (Schema.org: TouristAttraction, LocalBusiness, BreadcrumbList), sitemap, robots.txt, PWA manifest. Cieľová skupina: turisti, horolezci, návštevníci regiónu hľadajúci nocľah v prírode.',
+    image: '/images/projects/utulna kralova studna.png',
+    technologies: [
+      'HTML5',
+      'CSS3',
+      'JavaScript (vanilla)',
+      'Sharp (npm)',
+      'Nginx',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Passport.js',
+      'Google OAuth 2.0',
+      'express-session',
+      'cookie-parser',
+      'pg',
+      'cors',
+      'dotenv',
+      'Docker',
+      'Docker Compose',
+      'PostgreSQL 15',
+      'GDPR',
+      'PWA',
+      'Structured Data (JSON-LD)',
+    ],
+    githubUrl: '',
+    liveUrl: 'https://utulna-kralova-studna.online/',
+    category: 'fullstack',
+  },
+  {
+    id: 7,
+    title: 'Webová stránka AlleCon s.r.o.',
+    description:
+      'Firemná prezentačná webová stránka pre projektovú a inžiniersku kanceláriu AlleCon s.r.o. Prezentácia firmy, ponuka služieb, referencie s galériou, kontaktný formulár a dvojjazyčnosť (SK/EN).',
+    longDescription:
+      'Webová stránka pre projektovú a inžiniersku kanceláriu AlleCon s.r.o. (Košice, Slovensko), ktorá poskytuje komplexné služby v oblasti projektovania stavebných konštrukcií, statiky, koordinácie stavebných projektov a technického dozoru. Stránka slúži ako hlavný komunikačný kanál medzi firmou a potenciálnymi klientmi. Hlavné funkcie: Prezentácia firmy – informácie o spoločnosti, histórii a službách. Ponuka služieb – detailný prehľad poskytovaných služieb. Referencie – interaktívna databáza realizovaných projektov s galériou obrázkov. Kontaktný formulár – možnosť kontaktovať firmu cez webový formulár. Dvojjazyčnosť – podpora slovenčiny a angličtiny s dynamickým prepínaním jazykov. Responzívny dizajn – optimalizované zobrazenie pre všetky zariadenia. SEO optimalizácia – meta tagy, Open Graph, Twitter karty, Structured Data (LocalBusiness, WebSite, BreadcrumbList), sitemap, robots.txt.',
+    image: '/images/projects/allecon.sk.png',
+    technologies: [
+      'HTML5',
+      'CSS3',
+      'JavaScript (ES6+)',
+      'CSS Variables',
+      'CSS Grid',
+      'Flexbox',
+      'Flag Icons',
+      'Google Analytics',
+      'Google Maps',
+      'Structured Data (JSON-LD)',
+      'Sitemap',
+      'Robots.txt',
+      'LocalStorage API',
+    ],
+    githubUrl: '',
+    liveUrl: 'https://www.allecon.sk',
+    category: 'web',
+  },
+]
+
+
+

@@ -1,0 +1,61 @@
+# Caddyfile pre routovanie oboch stránok
+#
+#
+# POZOR! Tento Caddyfile je len pre lokálny vývoj. 
+#
+#
+#
+#
+#
+
+
+# Portfolio - kubojancik.site
+localhost:80 {
+    reverse_proxy portfolio-app:80
+
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-XSS-Protection "1; mode=block"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # Compression
+    encode gzip zstd
+
+    # Logging
+    log {
+        output stdout
+        format console
+    }
+}
+
+# Útulňa Kráľová Studňa - utulna-kralova-studna.online
+utulna-kralova-studna.online {
+    reverse_proxy frontend:80
+
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-XSS-Protection "1; mode=block"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # Compression
+    encode gzip zstd
+
+    # Logging
+    log {
+        output stdout
+        format console
+    }
+}
+
+# HTTP to HTTPS redirect
+:80 {
+    redir https://{host}{uri} permanent
+}

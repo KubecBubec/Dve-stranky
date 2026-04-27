@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Mountain background -->
+  <path d="M0 80 L30 50 L50 60 L70 40 L100 70 L100 100 L0 100 Z" fill="#2d5016"/>
+  <!-- Cabin/hut -->
+  <rect x="35" y="45" width="30" height="25" fill="#8b4513" stroke="#654321" stroke-width="1"/>
+  <!-- Roof -->
+  <path d="M30 45 L50 30 L70 45 Z" fill="#a0522d"/>
+  <!-- Door -->
+  <rect x="45" y="60" width="10" height="10" fill="#654321"/>
+  <!-- Window -->
+  <rect x="38" y="50" width="8" height="8" fill="#87ceeb" stroke="#654321" stroke-width="0.5"/>
+  <rect x="54" y="50" width="8" height="8" fill="#87ceeb" stroke="#654321" stroke-width="0.5"/>
+  <!-- Water spring/well symbol -->
+  <circle cx="75" cy="65" r="5" fill="#4169e1" stroke="#1e3a8a" stroke-width="1"/>
+  <path d="M75 60 L75 70 M70 65 L80 65" stroke="#1e3a8a" stroke-width="1.5"/>
+</svg>

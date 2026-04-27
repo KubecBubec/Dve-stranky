@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://utulna-kralova-studna.sk/sitemap.xml
+
+# Disallow admin/auth pages if they exist
+Disallow: /auth/
+Disallow: /admin/
+
+# Allow all images
+Allow: /images/
+
+# Crawl-delay (optional, can be removed if not needed)
+Crawl-delay: 1

@@ -1,0 +1,25 @@
+services:
+  # React aplikácia (nginx pre statické súbory)
+  # Poznámka: Tento docker-compose.yml sa používa len pre lokálny vývoj.
+  # Pre produkciu použite docker-compose.yml na root úrovni projektu.
+  portfolio-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # EmailJS environment variables pre build
+        VITE_EMAILJS_PUBLIC_KEY: ${VITE_EMAILJS_PUBLIC_KEY}
+        VITE_EMAILJS_SERVICE_ID: ${VITE_EMAILJS_SERVICE_ID}
+        VITE_EMAILJS_TEMPLATE_ID: ${VITE_EMAILJS_TEMPLATE_ID}
+    env_file:
+      - .env
+    container_name: portfolio-app
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+    ports:
+      - "8080:80"  # Len pre lokálny vývoj
+
+networks:
+  portfolio-network:
+    driver: bridge
