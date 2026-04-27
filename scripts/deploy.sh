@@ -4,7 +4,6 @@ set -euo pipefail
 APP_DIR="${APP_DIR:-/home/ubuntu/stranky}"
 REPO_URL="${REPO_URL:-https://github.com/KubecBubec/Dve-stranky.git}"
 BRANCH="${BRANCH:-main}"
-COMPOSE_COMMAND="${COMPOSE_COMMAND:-docker compose}"
 
 echo "Deploying ${REPO_URL} (${BRANCH}) to ${APP_DIR}"
 
@@ -15,6 +14,18 @@ fi
 
 if ! command -v docker >/dev/null 2>&1; then
   echo "docker is required on the server." >&2
+  exit 1
+fi
+
+if [ -n "${COMPOSE_COMMAND:-}" ]; then
+  read -r -a compose_command <<< "${COMPOSE_COMMAND}"
+elif docker compose version >/dev/null 2>&1; then
+  compose_command=(docker compose)
+elif command -v docker-compose >/dev/null 2>&1; then
+  compose_command=(docker-compose)
+else
+  echo "Docker Compose is required on the server." >&2
+  echo "Install the Docker Compose plugin or docker-compose, then rerun this script." >&2
   exit 1
 fi
 
@@ -50,8 +61,8 @@ if [ ! -f ".env" ]; then
   exit 1
 fi
 
-${COMPOSE_COMMAND} up -d --build --remove-orphans
-${COMPOSE_COMMAND} ps
+"${compose_command[@]}" up -d --build --remove-orphans
+"${compose_command[@]}" ps
 
 docker image prune -f >/dev/null 2>&1 || true
 
