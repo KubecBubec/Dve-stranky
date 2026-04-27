@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="${APP_DIR:-/home/ubuntu/stranky/Dve stranky}"
+APP_DIR="${APP_DIR:-/home/ubuntu/stranky}"
 REPO_URL="${REPO_URL:-https://github.com/KubecBubec/Dve-stranky.git}"
 BRANCH="${BRANCH:-main}"
 COMPOSE_COMMAND="${COMPOSE_COMMAND:-docker compose}"

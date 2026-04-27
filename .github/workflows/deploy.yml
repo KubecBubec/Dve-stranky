@@ -63,7 +63,7 @@ jobs:
           : "${SERVER_SSH_KEY:?Missing GitHub secret SERVER_SSH_KEY}"
 
           SERVER_PORT="${SERVER_PORT:-22}"
-          SERVER_APP_DIR="${SERVER_APP_DIR:-/home/ubuntu/stranky/Dve stranky}"
+          SERVER_APP_DIR="${SERVER_APP_DIR:-/home/ubuntu/stranky}"
 
           mkdir -p ~/.ssh
           printf '%s\n' "${SERVER_SSH_KEY}" > ~/.ssh/deploy_key
