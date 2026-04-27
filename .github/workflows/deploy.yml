@@ -1,0 +1,74 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to Linux server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            Portfolio/package-lock.json
+            Útulňa Kráľová Studňa/frontend/package-lock.json
+
+      - name: Install Portfolio dependencies
+        working-directory: Portfolio
+        run: npm ci
+
+      - name: Build Portfolio
+        working-directory: Portfolio
+        env:
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
+        run: npm run build
+
+      - name: Check Utulna backend syntax
+        working-directory: "Útulňa Kráľová Studňa/backend"
+        run: node --check server.js
+
+      - name: Install Utulna frontend dependencies
+        working-directory: "Útulňa Kráľová Studňa/frontend"
+        run: npm ci
+
+      - name: Run deploy script over SSH
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SERVER_APP_DIR: ${{ secrets.SERVER_APP_DIR }}
+          REPO_URL: https://github.com/KubecBubec/Dve-stranky.git
+          BRANCH: main
+        run: |
+          set -euo pipefail
+
+          : "${SERVER_HOST:?Missing GitHub secret SERVER_HOST}"
+          : "${SERVER_USER:?Missing GitHub secret SERVER_USER}"
+          : "${SERVER_SSH_KEY:?Missing GitHub secret SERVER_SSH_KEY}"
+
+          SERVER_PORT="${SERVER_PORT:-22}"
+          SERVER_APP_DIR="${SERVER_APP_DIR:-/home/ubuntu/stranky/Dve stranky}"
+
+          mkdir -p ~/.ssh
+          printf '%s\n' "${SERVER_SSH_KEY}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${SERVER_PORT}" "${SERVER_HOST}" >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/deploy_key -p "${SERVER_PORT}" "${SERVER_USER}@${SERVER_HOST}" \
+            "APP_DIR='${SERVER_APP_DIR}' REPO_URL='${REPO_URL}' BRANCH='${BRANCH}' bash -s" < scripts/deploy.sh
