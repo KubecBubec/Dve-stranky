@@ -10,7 +10,7 @@
 
 
 # Portfolio - kubojancik.site
-localhost:80 {
+kubojancik.site {
     reverse_proxy portfolio-app:80
 
     # Security headers
