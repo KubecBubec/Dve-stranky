@@ -1,9 +1,9 @@
-version: '3.8'
-
 services:
   # Caddy router pre obe stránky
   caddy:
-    image: caddy:latest
+    build:
+      context: .
+      dockerfile: Caddy.Dockerfile
     container_name: caddy-router
     restart: unless-stopped
     ports:
@@ -11,7 +11,6 @@ services:
       - "443:443"
       - "443:443/udp"  # Pre HTTP/3 (QUIC)
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     networks:
@@ -80,19 +79,15 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-    volumes:
-      - ./Útulňa Kráľová Studňa/backend:/app
-      - /app/node_modules
 
   # Útulňa - Frontend
   frontend:
-    image: nginx:alpine
+    build:
+      context: ./Útulňa Kráľová Studňa/frontend
+      dockerfile: Dockerfile
     container_name: utulna-frontend
     networks:
       - main-network
-    volumes:
-      - ./Útulňa Kráľová Studňa/frontend:/usr/share/nginx/html:ro
-      - ./Útulňa Kráľová Studňa/frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       backend:
         condition: service_healthy

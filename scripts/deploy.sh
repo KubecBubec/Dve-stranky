@@ -61,7 +61,7 @@ if [ ! -f ".env" ]; then
   exit 1
 fi
 
-"${compose_command[@]}" up -d --build --remove-orphans
+"${compose_command[@]}" up -d --build --force-recreate --remove-orphans
 "${compose_command[@]}" ps
 
 docker image prune -f >/dev/null 2>&1 || true
