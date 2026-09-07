@@ -72,6 +72,32 @@ export const projects: Project[] = [
   },
   {
     id: 4,
+    title: 'Predikcia odchodu zákazníka (Machine Learning)',
+    description:
+      'Predikčná webová služba na odhad odchodu zákazníka v telekomunikáciách. Formulár a API vráti pravdepodobnosť churnu, k tomu beží monitoring a HTTPS nasadenie na cloude.',
+    longDescription:
+      'Aplikácia predikuje, či telekomunikačný zákazník pravdepodobne odíde, na základe verejného datasetu Telco Customer Churn a natrénovaného sklearn pipeline (predvolene MLP). Vo prehliadači je viackrokový formulár s predvoľbami a výsledkom pravdepodobnosti; rovnakú predikciu poskytuje POST /predict so Swagger dokumentáciou. Projekt pokrýva celý reťazec od predspracovania a porovnania modelov v notebookoch cez produkčný tréning a unit/integračné testy až po Docker image. Stojí za spomenutie monitoring (Prometheus, Grafana, Loki), reverse proxy s Let\'s Encrypt (Caddy) a CI/CD s Terraform/Ansible deployom na AWS EC2.',
+    image: '/images/projects/insa zadanie.png',
+    technologies: [
+      'Python 3.11',
+      'FastAPI',
+      'scikit-learn',
+      'pandas',
+      'Pydantic',
+      'Docker',
+      'Prometheus',
+      'Grafana',
+      'Caddy',
+      'AWS',
+      'Terraform',
+      'Ansible',
+    ],
+    githubUrl: 'https://github.com/INSA-25-26/Jakub-Jancik',
+    liveUrl: 'https://kubik-agent.space/',
+    category: 'fullstack',
+  },
+  {
+    id: 5,
     title: 'Stránka PROXI Restaurant & Bar',
     description:
       'Webová stránka pre PROXI Restaurant & Bar s prezentáciou reštaurácie, menu, galériou fotografií, rezervačným systémom, kontaktným formulárom a admin panelom na správu týždenného menu.',
@@ -88,11 +114,11 @@ export const projects: Project[] = [
       'JSON',
     ],
     githubUrl: '',
-    liveUrl: 'https://test.proxirestaurant.sk',
+    liveUrl: 'https://proxi-restaurant.vercel.app/',
     category: 'web',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Webová stránka (aa24.sk) + Systém generovania zmlúv',
     description:
       'Webová prezentácia pre 24/7 asistenčnú službu pri autonehodách v Košiciach a okolí s admin panelom a systémom generovania zmlúv o poskytnutí náhradného vozidla s exportom do PDF a odosielaním emailov.',
@@ -116,7 +142,7 @@ export const projects: Project[] = [
     category: 'fullstack',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Útulňa Kráľová Studňa',
     description:
       'Webová aplikácia pre turistickú útulňu v pohorí Čierna hora (okolo 450 m od červenej turistickej magistrály), v oblasti Sokoľ, Košice-okolie. Informačná stránka, kalendár návštev a fórum.',
@@ -151,7 +177,7 @@ export const projects: Project[] = [
     category: 'fullstack',
   },
   {
-    id: 7,
+    id: 8,
     title: 'Webová stránka AlleCon s.r.o.',
     description:
       'Firemná prezentačná webová stránka pre projektovú a inžiniersku kanceláriu AlleCon s.r.o. Prezentácia firmy, ponuka služieb, referencie s galériou, kontaktný formulár a dvojjazyčnosť (SK/EN).',
@@ -176,6 +202,55 @@ export const projects: Project[] = [
     githubUrl: '',
     liveUrl: 'https://www.allecon.sk',
     category: 'web',
+  },
+  {
+    id: 9,
+    title: 'GARANT REAL',
+    description:
+      'Firemný web realitnej kancelárie GARANT REAL pre klientov v Prešove a okolí. Katalóg predaja a prenájmu s filtrami, detaily ponúk s PDF listom a formuláre vrátane online konzultácie.',
+    longDescription:
+      'Produkčný web realitnej kancelárie GARANT REAL zobrazuje ponuky, dopyty, blog, referencie a tím zo externého JSON API. Návštevníci filtrujú predaj a prenájom, otvárajú detail nehnuteľnosti s galériou a Street View a stiahnu produktový list v PDF. Formuláre (kontakt, ponúknite/nájdeme, kariéra, newsletter) idú cez SMTP; newsletter sa zapisuje do Gnet CRM a online konzultácia beží cez Calendly. Lokálny SQLite katalóg synchronizuje dopyty z API a chránený admin panel poskytuje monitoring servera. Nasadenie je na Ubuntu s nginx a PHP-FPM, s automatickým deployom cez GitHub Actions.',
+    image: '/images/projects/garantreal.png',
+    technologies: [
+      'PHP 8.3',
+      'Composer',
+      'mPDF',
+      'PHPMailer',
+      'SQLite',
+      'SendGrid',
+      'Gnet CRM',
+      'Calendly',
+      'Google Maps',
+      'nginx',
+      'Python',
+      'GitHub Actions',
+    ],
+    githubUrl: '',
+    liveUrl: 'https://www.garantreal.sk',
+    category: 'fullstack',
+  },
+  {
+    id: 10,
+    title: 'Rentcar24.sk',
+    description:
+      'Firemný web autopožičovne Rentcar24 v Košiciach pre klientov hľadajúcich prenájom vozidiel. Katalóg áut s fotogalériou a cenníkom, online rezervácia a kontaktný formulár s e-mailovým potvrdením.',
+    longDescription:
+      'Webová prezentácia autopožičovne Rentcar24 v Košiciach so zoznamom vozidiel, cenníkom podľa dĺžky prenájmu a stránkami s podmienkami prenájmu. Flotila sa načítava z JSON a synchronizuje sa do katalógu, cenníka aj výberu vo formulári rezervácie vrátane fotogalérie. Rezervačný a kontaktný formulár odosielajú HTML e-maily cez PHP a SMTP (PHPMailer) zákazníkovi aj firme. Rieši online dopyt bez telefonátu: výber vozidla, termínu a miesta vyzdvihnutia. Apache rewrite skracuje URL a QR odkaz /recenzia smeruje na Google recenziu.',
+    image: '/images/projects/rentcar.png',
+    technologies: [
+      'HTML',
+      'CSS',
+      'JavaScript',
+      'PHP',
+      'Bootstrap 4.6',
+      'jQuery',
+      'AOS',
+      'PHPMailer',
+      'Apache',
+    ],
+    githubUrl: '',
+    liveUrl: 'https://www.rentcar24.sk/',
+    category: 'fullstack',
   },
 ]
 
