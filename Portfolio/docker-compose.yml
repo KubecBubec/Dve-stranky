@@ -6,11 +6,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        # EmailJS environment variables pre build
-        VITE_EMAILJS_PUBLIC_KEY: ${VITE_EMAILJS_PUBLIC_KEY}
-        VITE_EMAILJS_SERVICE_ID: ${VITE_EMAILJS_SERVICE_ID}
-        VITE_EMAILJS_TEMPLATE_ID: ${VITE_EMAILJS_TEMPLATE_ID}
     env_file:
       - .env
     container_name: portfolio-app

@@ -5,16 +5,6 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Build arguments pre environment variables
-ARG VITE_EMAILJS_PUBLIC_KEY
-ARG VITE_EMAILJS_SERVICE_ID
-ARG VITE_EMAILJS_TEMPLATE_ID
-
-# Nastavenie environment variables pre build
-ENV VITE_EMAILJS_PUBLIC_KEY=${VITE_EMAILJS_PUBLIC_KEY}
-ENV VITE_EMAILJS_SERVICE_ID=${VITE_EMAILJS_SERVICE_ID}
-ENV VITE_EMAILJS_TEMPLATE_ID=${VITE_EMAILJS_TEMPLATE_ID}
-
 # Kopírovanie package súborov
 COPY package*.json ./
 
