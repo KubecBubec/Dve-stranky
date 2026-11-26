@@ -49,20 +49,15 @@ Kontajnery:
 
 ## Deploy
 
-Deploy beží cez GitHub Actions v jednom workflowe:
+Portfólio sa nasadzuje cez Vercel (samostatný projekt, Root Directory `Portfolio`) automaticky pri pushi do `main`.
+
+GitHub Actions workflow už nič nenasadzuje, len kontroluje:
 
 1. Build portfólia.
 2. Syntax check backendu Útulne.
 3. Kontrola frontend dependencies Útulne.
-4. SSH deploy na server.
 
-Serverový deploy script:
-
-```bash
-scripts/deploy.sh
-```
-
-Script na serveri stiahne najnovší `main` z GitHubu a spustí:
+Automatický SSH deploy na pôvodný server bol odstránený, lebo server neodpovedá. Ručný serverový script ostáva v `scripts/deploy.sh` – stiahne najnovší `main` z GitHubu a spustí:
 
 ```bash
 docker-compose up -d --build --remove-orphans
