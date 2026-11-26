@@ -46,43 +46,18 @@ Uprav súbory v `src/data/`:
 - `skills.ts` - Zručnosti a programovacie jazyky
 - `projects.ts` - Projekty a portfolio
 
-### EmailJS Konfigurácia (Kontaktný formulár)
+### Kontaktný formulár (Resend)
 
-Pre funkčný kontaktný formulár je potrebné nastaviť EmailJS:
+Formulár posiela správy cez serverless funkciu `api/contact.js`, ktorá beží na Verceli a odosiela e-maily cez [Resend](https://resend.com).
 
-1. **Vytvor účet na [EmailJS](https://www.emailjs.com/)** (bezplatný tier je dostatočný)
+1. Vytvor si účet na Resend (bezplatný plán stačí) a vygeneruj API kľúč.
+2. Vo Vercel projekte nastav premenné prostredia:
+   - `RESEND_API_KEY` - API kľúč z Resend
+   - `CONTACT_TO_EMAIL` - adresa, kam majú správy chodiť
+   - `CONTACT_FROM_EMAIL` - voliteľné; bez overenej domény sa použije `onboarding@resend.dev`, ktorý vie posielať len na e-mail tvojho Resend účtu
+3. Na odpoveď stačí v e-mailovom klientovi kliknúť na „Odpovedať“ (Reply-To je adresa návštevníka).
 
-2. **Vytvor Email Service:**
-   - Choď do "Email Services"
-   - Pridaj nový service (napr. Gmail, Outlook)
-   - Postupuj podľa inštrukcií pre pripojenie tvojho emailu
-
-3. **Vytvor Email Template:**
-   - Choď do "Email Templates"
-   - Vytvor nový template
-   - **Pozri `EMAILJS_TEMPLATE.md`** pre detailný návod a príklad template HTML
-   - V template použij tieto premenné:
-     - `{{from_name}}` - meno odosielateľa
-     - `{{from_email}}` - email odosielateľa
-     - `{{message}}` - správa
-     - `{{to_email}}` - tvoj email (pre informáciu)
-   - **Dôležité**: Nastav "Reply To" na `{{from_email}}` aby si mohol odpovedať priamo
-
-4. **Získaj credentials:**
-   - **Public Key**: Account → General → Public Key
-   - **Service ID**: Email Services → tvoj service → Service ID
-   - **Template ID**: Email Templates → tvoj template → Template ID
-
-5. **Nastav environment variables:**
-   - Vytvor `.env` súbor v root adresári projektu
-   - Pridaj:
-     ```
-     VITE_EMAILJS_PUBLIC_KEY=tvoj_public_key
-     VITE_EMAILJS_SERVICE_ID=tvoj_service_id
-     VITE_EMAILJS_TEMPLATE_ID=tvoj_template_id
-     ```
-
-**Poznámka:** Ak EmailJS nie je nakonfigurovaný, formulár zobrazí chybovú správu pri pokuse o odoslanie.
+Lokálne funkcia beží len cez `vercel dev`; obyčajný `npm run dev` endpoint `/api/contact` nemá.
 
 Email adresa pre zobrazenie je nastavená v `src/data/personalInfo.ts`.
 

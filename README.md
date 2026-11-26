@@ -29,7 +29,7 @@ cp .env.example .env
 
 Potrebné skupiny premenných:
 
-- EmailJS premenné pre kontaktný formulár v portfóliu.
+- Resend premenné pre kontaktný formulár v portfóliu (nastavujú sa vo Vercel projekte).
 - Google OAuth premenné pre Útulňu.
 - Session secret a databázové premenné pre backend.
 

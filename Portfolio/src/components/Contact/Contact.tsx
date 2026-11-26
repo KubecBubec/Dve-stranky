@@ -2,9 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FiMail, FiGithub, FiInstagram, FiSend, FiCheckCircle, FiXCircle } from 'react-icons/fi'
-import emailjs from '@emailjs/browser'
 import { personalInfo } from '../../data/personalInfo'
-import { emailjsConfig } from '../../config/emailjs'
 
 type MessageStatus = 'idle' | 'success' | 'error'
 
@@ -19,6 +17,8 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [messageStatus, setMessageStatus] = useState<MessageStatus>('idle')
   const [statusMessage, setStatusMessage] = useState('')
+  // Skryté pole proti spamu - človek ho nevidí, boty ho vyplnia
+  const [honeypot, setHoneypot] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,46 +26,18 @@ const Contact = () => {
     setMessageStatus('idle')
     setStatusMessage('')
 
-    // Kontrola, či sú EmailJS credentials nastavené
-    if (!emailjsConfig.publicKey || !emailjsConfig.serviceId || !emailjsConfig.templateId) {
-      setIsSubmitting(false)
-      setMessageStatus('error')
-      
-      // V development móde zobraz detailnejšie informácie, v produkcii len všeobecnú hlášku
-      if (import.meta.env.DEV) {
-        const missingVars = []
-        if (!emailjsConfig.publicKey) missingVars.push('VITE_EMAILJS_PUBLIC_KEY')
-        if (!emailjsConfig.serviceId) missingVars.push('VITE_EMAILJS_SERVICE_ID')
-        if (!emailjsConfig.templateId) missingVars.push('VITE_EMAILJS_TEMPLATE_ID')
-        setStatusMessage(
-          `EmailJS nie je správne nakonfigurovaný. Chýbajúce premenné: ${missingVars.join(', ')}. ` +
-          'Skontroluj .env súbor a reštartuj dev server.'
-        )
-        console.error('Chýbajúce EmailJS environment variables:', missingVars)
-      } else {
-        setStatusMessage(
-          'EmailJS nie je správne nakonfigurovaný. Kontaktuj prosím administrátora.'
-        )
-        console.error('EmailJS configuration error: Missing environment variables')
-      }
-      return
-    }
-
     try {
-      // Inicializácia EmailJS s Public Key
-      emailjs.init(emailjsConfig.publicKey)
+      // Odoslanie cez vlastnú serverless funkciu (api/contact.js na Verceli)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, website: honeypot }),
+      })
 
-      // Odoslanie emailu cez EmailJS
-      await emailjs.send(
-        emailjsConfig.serviceId,
-        emailjsConfig.templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_email: personalInfo.email,
-        }
-      )
+      if (!response.ok) {
+        const data = await response.json().catch(() => null)
+        throw new Error(data?.error || `HTTP ${response.status}`)
+      }
 
       // Úspech
       setMessageStatus('success')
@@ -73,9 +45,11 @@ const Contact = () => {
       setFormData({ name: '', email: '', message: '' })
     } catch (error) {
       // Chyba
-      console.error('EmailJS Error:', error)
+      console.error('Contact form error:', error)
       setMessageStatus('error')
-      setStatusMessage('Nastala chyba pri odosielaní správy. Skús to prosím znova alebo ma kontaktuj priamo na email.')
+      setStatusMessage(
+        `Nastala chyba pri odosielaní správy. Skús to prosím znova alebo ma kontaktuj priamo na ${personalInfo.email}.`
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -227,6 +201,17 @@ const Contact = () => {
               transition={{ delay: 0.4, duration: 0.6 }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
+                <input
+                  type="text"
+                  name="website"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
+
                 <div>
                   <label
                     htmlFor="name"
